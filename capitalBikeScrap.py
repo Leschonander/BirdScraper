@@ -26,4 +26,9 @@ Stationdataframe = pd.DataFrame(Stationdata["data"]["stations"])
 
 result = pd.merge(dataframe, Stationdataframe[["name", "station_id", "lat", "lon", "region_id"]], on='station_id', how = "left")
 
-result.to_csv('JumpStation.csv', mode='a', header=False)
+original = pd.read_csv("JumpStation.csv")
+frames = [original, result]
+merged = pd.concat(frames)
+
+merged.to_csv("JumpStation.csv", header = True)
+
